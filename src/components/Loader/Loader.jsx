@@ -1,9 +1,9 @@
 import { FallingLines } from "react-loader-spinner";
-import s from "./Loader.module.css";
+import styles from "./Loader.module.css";
 
 const Loader = () => {
   return (
-    <div className={s.loader}>
+    <div className={styles.loader}>
       <FallingLines
         color="#4fa94d"
         width="100"
