@@ -1,0 +1,38 @@
+.header_form {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(121, 192, 209);
+  padding: 32px;
+  border-radius: 3px;
+  box-shadow: 0px 16px 24px -10px rgba(0, 0, 0, 0.7);
+}
+
+.header_form input {
+  gap: 20px;
+  padding: 18px;
+  border-radius: 5px;
+  border-color: transparent;
+  margin-right: 32px;
+}
+
+.header_form input::placeholder {
+  font-size: 14px;
+  color: #0e1e41;
+}
+
+.header_form input:hover,
+:focus {
+  border: 1px solid #90b0f3;
+}
+
+.header_form button {
+  background-color: aliceblue;
+  border: none;
+}
+
+.header_form button:hover {
+  background-color: aqua;
+  border: 1px solid #90b0f3;
+}

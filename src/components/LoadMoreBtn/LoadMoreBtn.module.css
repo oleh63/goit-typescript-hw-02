@@ -1,0 +1,8 @@
+.btn_load {
+  background-color: aliceblue;
+}
+
+.btn_load:hover {
+  background-color: aqua;
+  border: 1px solid #90b0f3;
+}
