@@ -5,7 +5,7 @@ import styles from "./SearchBar.module.css";
 const SearchBar = ({ onSubmit }) => {
   const [value, setValue] = useState("");
 
-  const handlSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!value.trim()) {
       toast.error("Please enter a query!");
@@ -17,7 +17,7 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
     <header className={styles.header_form}>
-      <form onSubmit={handlSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           onChange={(e) => setValue(e.target.value)}
           value={value}

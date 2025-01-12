@@ -6,12 +6,13 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageModal from "./components/ImageModal/ImageModal";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // Додано для зберігання тексту помилки
+  const [errorMessage, setErrorMessage] = useState("");
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
 
@@ -25,7 +26,7 @@ const App = () => {
       try {
         setIsLoading(true);
         setIsError(false);
-        setErrorMessage(""); // Скидання тексту помилки
+        setErrorMessage("");
         const { results } = await fetchPhotos(query, page);
         setPhotos((prev) => [...prev, ...results]);
       } catch (error) {
@@ -67,6 +68,7 @@ const App = () => {
 
   return (
     <div>
+      <Toaster position="top-right" reverseOrder={false} />
       <SearchBar onSubmit={handleChangeQuery} />
       {isError && <ErrorMessage message={errorMessage} />}
       {!isError && photos.length > 0 && (
