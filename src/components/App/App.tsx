@@ -1,23 +1,26 @@
-import { useEffect, useState } from "react";
-import { fetchPhotos } from "./services/api";
-import Loader from "./components/Loader/Loader";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-import SearchBar from "./components/SearchBar/SearchBar";
-import ImageModal from "./components/ImageModal/ImageModal";
+import { useEffect, useState, FormEvent } from "react";
+
+import { fetchPhotos } from "../../services/api";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import SearchBar from "../SearchBar/SearchBar";
+import ImageModal from "../ImageModal/ImageModal";
 import { Toaster } from "react-hot-toast";
+import { Photo } from "./App.types";
 
 const App = () => {
-  const [photos, setPhotos] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [page, setPage] = useState<number>(1);
+
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!query) return;
@@ -27,7 +30,10 @@ const App = () => {
         setIsLoading(true);
         setIsError(false);
         setErrorMessage("");
-        const { results } = await fetchPhotos(query, page);
+        const { results }: { results: Photo[] } = await fetchPhotos(
+          query,
+          page
+        );
         setPhotos((prev) => [...prev, ...results]);
       } catch (error) {
         setIsError(true);
@@ -43,11 +49,11 @@ const App = () => {
     getPhotodData();
   }, [page, query]);
 
-  const handleChangePage = () => {
+  const handleChangePage = (): void => {
     setPage((prev) => prev + 1);
   };
 
-  const handleChangeQuery = (newQuery) => {
+  const handleChangeQuery = (newQuery: string): void => {
     if (newQuery === query) {
       return;
     }
@@ -56,12 +62,12 @@ const App = () => {
     setPage(1);
   };
 
-  const handleClickImage = (imageUrl) => {
+  const handleClickImage = (imageUrl: string): void => {
     setSelectedImage(imageUrl);
     setIsModalOpen(true);
   };
 
-  const handleClickImageClose = () => {
+  const handleClickImageClose = (): void => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
