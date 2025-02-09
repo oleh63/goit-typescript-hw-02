@@ -1,4 +1,4 @@
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect, useState } from "react";
 
 import { fetchPhotos } from "../../services/api";
 import Loader from "../Loader/Loader";
@@ -84,11 +84,13 @@ const App = () => {
         </>
       )}
       {isLoading && <Loader />}
-      <ImageModal
-        isOpen={isModalOpen}
-        onClose={handleClickImageClose}
-        image={selectedImage}
-      />
+      {isModalOpen && selectedImage && (
+        <ImageModal
+          isOpen={isModalOpen}
+          onClose={handleClickImageClose}
+          image={selectedImage}
+        />
+      )}
     </div>
   );
 };

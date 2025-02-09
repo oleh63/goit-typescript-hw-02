@@ -6,7 +6,7 @@ Modal.setAppElement("#root");
 type ImageModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  image: string;
+  image?: string;
 };
 
 const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image }) => {
@@ -25,7 +25,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image }) => {
         className={styles.modal}
       >
         <div onClick={handleClose}>
-          <img src={image} className={styles.img} />
+          {image && <img src={image} className={styles.img} />}
         </div>
       </Modal>
     </>
