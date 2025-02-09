@@ -1,6 +1,12 @@
+import { Photo } from "../App/App.types";
 import styles from "./ImageCard.module.css";
 
-const ImageCard = ({ item, onImageClick }) => {
+type ImageCardProps = {
+  item: Photo;
+  onImageClick: (imageUrl: string) => void;
+};
+
+const ImageCard: React.FC<ImageCardProps> = ({ item, onImageClick }) => {
   return (
     <div className={styles.contanier_img}>
       <img

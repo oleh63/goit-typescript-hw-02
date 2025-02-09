@@ -3,8 +3,14 @@ import styles from "./ImageModal.module.css";
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ isOpen, onClose, image }) => {
-  const handleClose = (e) => {
+type ImageModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  image: string;
+};
+
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image }) => {
+  const handleClose = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -17,9 +23,10 @@ const ImageModal = ({ isOpen, onClose, image }) => {
         onRequestClose={onClose}
         overlayClassName={styles.overlay}
         className={styles.modal}
-        onClick={handleClose}
       >
-        <img src={image} className={styles.img} />
+        <div onClick={handleClose}>
+          <img src={image} className={styles.img} />
+        </div>
       </Modal>
     </>
   );
