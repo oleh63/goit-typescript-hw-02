@@ -37,9 +37,12 @@ const App = () => {
         setPhotos((prev) => [...prev, ...results]);
       } catch (error) {
         setIsError(true);
-        setErrorMessage(
-          error.response?.data?.errors?.[0] || "An unexpected error occurred."
-        );
+
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage("An unexpected error occurred.");
+        }
         console.error(error);
       } finally {
         setIsLoading(false);
